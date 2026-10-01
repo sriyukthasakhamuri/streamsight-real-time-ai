@@ -2,6 +2,8 @@ import json
 
 from kafka import KafkaConsumer
 
+from app.services.database import insert_order_event
+
 
 KAFKA_BOOTSTRAP_SERVERS = "localhost:9092"
 KAFKA_TOPIC = "order-events"
@@ -14,7 +16,7 @@ def create_consumer() -> KafkaConsumer:
         bootstrap_servers=KAFKA_BOOTSTRAP_SERVERS,
         auto_offset_reset="earliest",
         enable_auto_commit=True,
-        group_id="streamsight-order-consumer",
+        group_id="streamsight-order-db-consumer",
         value_deserializer=lambda value: json.loads(
             value.decode("utf-8")
         ),
@@ -29,27 +31,30 @@ def main():
         f"Listening to Kafka topic: {KAFKA_TOPIC}"
     )
 
+    print(
+        "Saving order events to PostgreSQL..."
+    )
+
     try:
 
         for message in consumer:
 
             event = message.value
 
-            print(
-                "\nReceived order event:"
+            insert_order_event(
+                event
             )
 
             print(
-                json.dumps(
-                    event,
-                    indent=2,
-                )
+                f"Saved order event: "
+                f"{event['order_id']} "
+                f"| ${event['order_value']:,.2f}"
             )
 
     except KeyboardInterrupt:
 
         print(
-            "\nStopping consumer..."
+            "\nStopping database consumer..."
         )
 
     finally:
