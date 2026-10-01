@@ -30,7 +30,7 @@ The system:
 
 ### Dashboard Overview
 
-![StreamSight Dashboard](./docs/screenshots/01_dashboard_overview.png)
+![StreamSight Dashboard](./docs/01_dashboard_overview.png)
 
 The dashboard provides real-time visibility into:
 
@@ -44,7 +44,8 @@ The dashboard provides real-time visibility into:
 
 ### AI Operational Insight
 
-![AI Operational Insight](./docs/screenshots/02_ai_operational_insight.png)
+![AI Operational Insight](./docs/02_ai_operational_insight.png)
+
 
 The AI layer analyzes current operational metrics and recent anomaly events to generate a concise business-oriented summary.
 
@@ -61,7 +62,7 @@ The AI output is grounded in data retrieved from PostgreSQL.
 
 ### Real-Time Anomaly Alerts
 
-![Anomaly Alerts](./docs/screenshots/04_anomaly_alerts.png)
+![Anomaly Alerts](./docs/03_anomaly_alerts.png)
 
 StreamSight detects and stores operational anomalies such as:
 
